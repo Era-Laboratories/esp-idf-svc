@@ -621,7 +621,7 @@ impl<'a> EspWebSocketClient<'a> {
 impl Drop for EspWebSocketClient<'_> {
     fn drop(&mut self) {
         if let Err(e) = esp!(unsafe { esp_websocket_client_close(self.handle, self.timeout) }) {
-            log::warn!("WebSocket close failed during drop: {e:?}");
+            ::log::warn!("WebSocket close failed during drop: {e:?}");
         }
 
         esp!(unsafe { esp_websocket_client_destroy(self.handle) }).unwrap();
